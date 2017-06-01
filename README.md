@@ -1,6 +1,4 @@
-[![Circle CI](https://circleci.com/gh/abernix/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/abernix/meteord/tree/master)
-
-> ###Use [kadirahq/meteord](https://github.com/kadirahq/meteord) for meteor 1.4 and above. 
+[![Circle CI](https://circleci.com/gh/myktra/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/myktra/meteord/tree/master)
 
 ## MeteorD - Docker Runtime for Meteor Apps
 
@@ -11,16 +9,19 @@ There are two main ways you can use Docker with Meteor apps. They are:
 
 **MeteorD supports these two ways. Let's see how to use MeteorD**
 
+> This version supports low-memory environments like a t2.micro at AWS by enabling the Node garbage
+collector.
+
 ### 1. Build a Docker image for your app
 
 With this method, your app will be converted into a Docker image. Then you can simply run that image.  
 
-For that, you can use `meteorhacks/meteord:onbuild` as your base image. Magically, that's only thing you have to do. Here's how to do it:
+For that, you can use `myktra/meteord:onbuild` as your base image. Magically, that's only thing you have to do. Here's how to do it:
 
 Add following `Dockerfile` into the root of your app:
 
 ~~~shell
-FROM meteorhacks/meteord:onbuild
+FROM myktra/meteord:onbuild
 ~~~
 
 Then you can build the docker image with:
@@ -43,9 +44,9 @@ Then you can access your app from the port 8080 of the host system.
 
 #### Stop downloading Meteor each and every time (mostly in development)
 
-So, with the above method, MeteorD will download and install Meteor each and every time. That's bad especially in development. So, we've a solution for that. Simply use `meteorhacks/meteord:devbuild` as your base image.
+So, with the above method, MeteorD will download and install Meteor each and every time. That's bad especially in development. So, we've a solution for that. Simply use `myktra/meteord:devbuild` as your base image.
 
-> WARNING: Don't use `meteorhacks/meteord:devbuild` for your final build. If you used it, your image will carry the Meteor distribution as well. As a result of that, you'll end up with an image with ~700 MB.
+> WARNING: Don't use `myktra/meteord:devbuild` for your final build. If you used it, your image will carry the Meteor distribution as well. As a result of that, you'll end up with an image with ~700 MB.
 
 ### 2. Running a Meteor bundle with Docker
 
@@ -60,7 +61,7 @@ docker run -d \
     -e MONGO_OPLOG_URL=mongodb://oplog_url \
     -v /mybundle_dir:/bundle \
     -p 8080:80 \
-    meteorhacks/meteord:base
+    myktra/meteord:base
 ~~~
 
 With this method, MeteorD looks for the tarball version of the meteor bundle. So, you should build the meteor bundle for `os.linux.x86_64` and put it inside the `/bundle` volume. This is how you can build a meteor bundle.
@@ -80,7 +81,7 @@ docker run -d \
     -e MONGO_OPLOG_URL=mongodb://oplog_url \
     -e BUNDLE_URL=http://mybundle_url_at_s3.tar.gz \
     -p 8080:80 \
-    meteorhacks/meteord:base
+    myktra/meteord:base
 ~~~
 
 #### 2.2 With Docker Compose
@@ -104,7 +105,7 @@ mongo:
 
 When using Docker Compose to start a Meteor container with a Mongo container as well, we need to wait for the database to start up before we try to start the Meteor app, else the container will fail to start.
 
-This sample docker-compose.yml file starts up a container that has used meteorhacks/meterod as its base and a mongo container. It also passes along several variables to Meteor needed to start up, specifies the port number the container will listen on, and waits 30 seconds for the mongodb container to start up before starting up the Meteor container.
+This sample docker-compose.yml file starts up a container that has used myktra/meterod as its base and a mongo container. It also passes along several variables to Meteor needed to start up, specifies the port number the container will listen on, and waits 30 seconds for the mongodb container to start up before starting up the Meteor container.
 
 #### Rebuilding Binary Modules
 
@@ -118,7 +119,7 @@ docker run -d \
     -e BUNDLE_URL=http://mybundle_url_at_s3.tar.gz \
     -e REBUILD_NPM_MODULES=1 \
     -p 8080:80 \
-    meteorhacks/meteord:binbuild
+    myktra/meteord:binbuild
 ~~~
 
 ## Known Issues

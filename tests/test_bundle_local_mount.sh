@@ -23,7 +23,7 @@ docker run -d \
     -e ROOT_URL=http://localmount_app \
     -v /tmp/localmount:/bundle \
     -p 9090:80 \
-    "abernix/meteord:node-${NODE_VERSION}-base"
+    "myktra/meteord:node-${NODE_VERSION}-base"
 
 sleep 50
 

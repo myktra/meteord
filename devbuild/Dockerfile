@@ -2,7 +2,7 @@ FROM myktra/meteord:base
 MAINTAINER Mike Trachtman
 
 ARG NODE_VERSION
-ENV NODE_VERSION ${NODE_VERSION:-4.8.3}
+ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 
 ONBUILD RUN bash $METEORD_DIR/lib/install_meteor.sh
 ONBUILD COPY ./ /app

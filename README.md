@@ -1,6 +1,42 @@
-[![Circle CI](https://circleci.com/gh/myktra/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/myktra/meteord/tree/master)
+[![Circle CI](https://circleci.com/gh/abernix/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/abernix/meteord/tree/master)
 
-## MeteorD - Docker Runtime for Meteor Apps
+# MeteorD - Docker image for MUP
+
+## Supported tags
+
+Please see the explanation of the [tag variations](#tag-variations) (e.g. `-binbuild`, `-onbuild`) below.
+
+### Node 8 (Meteor 1.6+)
+
+#### Node 8.9.3
+
+* `node-8-base`, `node-8.9.3-base`
+* `node-8-binbuild`, `node-8.9.3-binbuild`
+* `node-8-onbuild`, `node-8.9.3-onbuild`
+* `node-8-devbuild`, `node-8.9.3-devbuild`
+
+### Node 4 (Meteor 1.4, 1.5)
+
+#### Node 4.8.7
+
+* `node-4-base`, `node-4.8.7-base`
+* `node-4-binbuild`, `node-4.8.7-binbuild`
+* `node-4-onbuild`, `node-4.8.7-onbuild`
+* `node-4-devbuild`, `node-4.8.7-devbuild`
+
+### Older Node versions
+
+For brevity, not all possibilities are listed above and there are many more available.  It's recommended that you use the latest version within the series which your Meteor was designed for (see titles above).  The most recent version will be tagged with a `node-x-*` tag accordingly.  For the full list, please see the ["Tags" tab](https://hub.docker.com/r/abernix/meteord/tags/) above.
+
+## Tag Variations
+
+There are three variations of each major Node-based release.
+
+* `-base`
+* `-binbuild`
+* `-onbuild`
+* `-devbuild`
+
 
 There are two main ways you can use Docker with Meteor apps. They are:
 
@@ -120,29 +156,4 @@ docker run -d \
     -e REBUILD_NPM_MODULES=1 \
     -p 8080:80 \
     myktra/meteord:binbuild
-~~~
-
-## Known Issues
-
-#### Spiderable Not Working (But, have a fix)
-
-There are some issues when running spiderable inside a Docker container. For that, check this issue: https://github.com/meteor/meteor/issues/2429
-
-Fortunately, there is a fix. Simply use [`ongoworks:spiderable`](https://github.com/ongoworks/spiderable) instead the official package.
-
-#### Container won't start on Joyent's Triton infrastructure
-
-There's currently (2015-07-18) an issue relating to how the command or entry point is parsed, so containers won't boot using the 'docker run' commands as above.
-
-Instead, Joyent support has suggested the following workaround until their fix can be rolled out.
-
-~~~shell
-docker run -d \
-    -e ROOT_URL=http://yourapp.com \
-    -e MONGO_URL=mongodb://url \
-    -e MONGO_OPLOG_URL=mongodb://oplog_url \
-    -p 80:80 \
-    --entrypoint=bash \
-    yourname/app \
-    /opt/meteord/run_app.sh
 ~~~

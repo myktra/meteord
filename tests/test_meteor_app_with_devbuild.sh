@@ -13,7 +13,7 @@ function clean() {
 cd /tmp
 clean
 
-meteor create hello
+meteor create --release 1.6.0.1 hello
 cd hello
 echo "FROM myktra/meteord:node-${NODE_VERSION}-devbuild" > Dockerfile
 

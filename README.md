@@ -8,12 +8,12 @@ Please see the explanation of the [tag variations](#tag-variations) (e.g. `-binb
 
 ### Node 8 (Meteor 1.6+)
 
-#### Node 8.9.3
+#### Node 8.11.1
 
-* `node-8-base`, `node-8.9.3-base`
-* `node-8-binbuild`, `node-8.9.3-binbuild`
-* `node-8-onbuild`, `node-8.9.3-onbuild`
-* `node-8-devbuild`, `node-8.9.3-devbuild`
+* `node-8-base`, `node-8.11.1-base`
+* `node-8-binbuild`, `node-8.11.1-binbuild`
+* `node-8-onbuild`, `node-8.11.1-onbuild`
+* `node-8-devbuild`, `node-8.11.1-devbuild`
 
 ### Node 4 (Meteor 1.4, 1.5)
 
